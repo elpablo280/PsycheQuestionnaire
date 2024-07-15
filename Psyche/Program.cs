@@ -1,4 +1,6 @@
-namespace Psykheya
+using Psyche.Workers;
+
+namespace Psyche
 {
     internal static class Program
     {

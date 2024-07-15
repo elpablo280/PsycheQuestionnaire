@@ -1,4 +1,4 @@
-﻿namespace Psykheya
+﻿namespace Psyche.Models
 {
     public class User
     {
@@ -14,7 +14,5 @@
             MiddleName = middleName;
             Group = group;
         }
-
-
     }
 }

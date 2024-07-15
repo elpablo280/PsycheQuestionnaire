@@ -1,4 +1,4 @@
-﻿namespace Psykheya
+﻿namespace Psyche
 {
     partial class TestForm
     {

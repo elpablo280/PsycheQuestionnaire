@@ -1,0 +1,30 @@
+{
+  "Questions": [
+    {
+      "Text": "Оно вообще работает 2?",
+      "Variants": [
+        {
+          "Text": "Да",
+          "Value": true
+        },
+        {
+          "Text": "Нет",
+          "Value": false
+        }
+      ]
+    },
+    {
+      "Text": "Реально работает 2?",
+      "Variants": [
+        {
+          "Text": "Да",
+          "Value": true
+        },
+        {
+          "Text": "Нет",
+          "Value": false
+        }
+      ]
+    }
+  ]
+}

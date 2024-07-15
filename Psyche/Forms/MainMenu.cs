@@ -1,4 +1,4 @@
-namespace Psykheya
+namespace Psyche
 {
     public partial class MainMenu : Form
     {

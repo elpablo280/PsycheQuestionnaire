@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
+using Psyche.Models;
 
-namespace Psykheya
+namespace Psyche
 {
     public partial class DataEntryForm : Form
     {
