@@ -1,4 +1,4 @@
-﻿namespace Psyche
+﻿namespace Psykheya
 {
     public partial class TestsMenuForm : Form
     {
