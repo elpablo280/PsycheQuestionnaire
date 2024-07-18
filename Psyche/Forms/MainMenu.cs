@@ -2,6 +2,8 @@ namespace Psyche
 {
     public partial class MainMenu : Form
     {
+        public TestsMenuForm testsMenuForm;
+
         public MainMenu()
         {
             InitializeComponent();
@@ -14,7 +16,7 @@ namespace Psyche
 
         private void beginWorkButton_Click(object sender, EventArgs e)
         {
-            TestsMenuForm testsMenuForm = new();
+            testsMenuForm = new();
             testsMenuForm.Show();
         }
     }

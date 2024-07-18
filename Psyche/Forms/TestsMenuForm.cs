@@ -40,9 +40,8 @@ namespace Psyche
             TestsQueue.Enqueue(text);
         }
 
-        private void beginWorkButton_Click(object sender, EventArgs e)
+        public void beginWorkButton_Click(object sender, EventArgs e)
         {
-
             if (!TestsQueue.TryDequeue(out string currentTest))
             {
                 MessageBox.Show("Очередь тестов пуста!");
@@ -52,43 +51,8 @@ namespace Psyche
 
             // todo
 
-            DataEntryForm dataEntryForm = new();
+            DataEntryForm dataEntryForm = new(currentTest);
             dataEntryForm.Show();
-
-            //TestForm testForm = new(currentTest);
-            //testForm.Show();
-
-            TestParser tp = new();
-            Test? Test = tp.ParseTest(currentTest);
-
-            foreach (var question in Test.Questions)
-            {
-                TestForm currentTestForm = new(currentTest);
-                currentTestForm.Show();
-
-                currentTestForm.Text = new FileInfo(currentTest).Name.Replace(".json", string.Empty);
-
-                Label label = new();
-                label.Location = new Point(10, 10);
-                label.Size = new(200, 30);
-                label.Text = question.Text;
-                currentTestForm.Controls.Add(label);
-
-                int i = 0;
-                foreach (var variant in question.Variants)
-                {
-                    Button button = new();
-                    button.Location = new Point(10 + 100 * i, 50);
-                    button.Text = variant.Text;
-                    currentTestForm.Controls.Add(button);
-
-                    i++;
-                }
-
-                //currentTestForm.Close();
-            }
-
-            //this.Close();
         }
 
         private void clearQueueButton_Click(object sender, EventArgs e)

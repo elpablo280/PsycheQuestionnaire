@@ -5,9 +5,12 @@ namespace Psyche
 {
     public partial class DataEntryForm : Form
     {
-        public DataEntryForm()
+        string currentTest;
+
+        public DataEntryForm(string currentTest)
         {
             InitializeComponent();
+            this.currentTest = currentTest;
         }
 
         // добавляем (проверяем наличие) юзера в базу и запускаем тест
@@ -58,6 +61,9 @@ namespace Psyche
                 int number = commandInsert.ExecuteNonQuery();
                 MessageBox.Show($"В таблицу Users добавлено объектов: {number}");
             }
+
+            TestForm currentTestForm = new(currentTest);
+            currentTestForm.Show();
 
             this.Close();
         }
