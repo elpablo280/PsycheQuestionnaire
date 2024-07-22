@@ -1,22 +1,21 @@
+using Psyche.Models;
+using Psyche.Workers;
+
 namespace Psyche
 {
     public partial class MainMenu : Form
     {
-        public TestsMenuForm testsMenuForm;
+        private Config Config { get; set; }
 
         public MainMenu()
         {
             InitializeComponent();
-        }
-
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
+            Config = new ConfigWorker().GetConfig();
         }
 
         private void beginWorkButton_Click(object sender, EventArgs e)
         {
-            testsMenuForm = new();
+            TestsMenuForm testsMenuForm = new(Config);
             testsMenuForm.Show();
         }
     }

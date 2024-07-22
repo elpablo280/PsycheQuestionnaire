@@ -5,12 +5,14 @@ namespace Psyche
 {
     public partial class DataEntryForm : Form
     {
-        string currentTest;
+        private readonly string CurrentTestFilepath;
+        private readonly Config Config;
 
-        public DataEntryForm(string currentTest)
+        public DataEntryForm(string currentTestFilepath, Config config)
         {
             InitializeComponent();
-            this.currentTest = currentTest;
+            CurrentTestFilepath = currentTestFilepath;
+            Config = config;
         }
 
         // добавляем (проверяем наличие) юзера в базу и запускаем тест
@@ -25,7 +27,7 @@ namespace Psyche
 
             string FIO = $"{user.LastName} {user.FirstName} {user.MiddleName}";
 
-            using (var connection = new SqliteConnection("Data Source=usersdata.db"))
+            using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
             {
                 connection.Open();
 
@@ -62,10 +64,10 @@ namespace Psyche
                 MessageBox.Show($"В таблицу Users добавлено объектов: {number}");
             }
 
-            TestForm currentTestForm = new(currentTest);
+            TestForm currentTestForm = new(CurrentTestFilepath, user);
             currentTestForm.Show();
 
-            this.Close();
+            Close();
         }
     }
 }

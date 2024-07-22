@@ -1,6 +1,6 @@
 ﻿namespace Psyche.Forms
 {
-    partial class TestEndForm
+    partial class ResultForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,57 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             textBox1 = new TextBox();
-            OKButton = new Button();
+            EscapeButton = new Button();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(49, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(694, 37);
-            label1.TabIndex = 0;
-            label1.Text = $"Тестирование завершено. Для выхода введите пароль";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(332, 71);
+            textBox1.Location = new Point(8, 9);
+            textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.PasswordChar = '*';
-            textBox1.Size = new Size(96, 23);
-            textBox1.TabIndex = 1;
+            textBox1.Size = new Size(780, 389);
+            textBox1.TabIndex = 0;
             // 
-            // button1
+            // EscapeButton
             // 
-            OKButton.Location = new Point(343, 118);
-            OKButton.Name = "OKButton";
-            OKButton.Size = new Size(75, 23);
-            OKButton.TabIndex = 2;
-            OKButton.Text = "Ок";
-            OKButton.UseVisualStyleBackColor = true;
-            OKButton.Click += OKButton_Click;
+            EscapeButton.Location = new Point(616, 404);
+            EscapeButton.Name = "EscapeButton";
+            EscapeButton.Size = new Size(172, 34);
+            EscapeButton.TabIndex = 1;
+            EscapeButton.Text = "Закрыть";
+            EscapeButton.UseVisualStyleBackColor = true;
+            EscapeButton.Click += EscapeButton_Click;
             // 
-            // TestEndForm
+            // ResultForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(OKButton);
+            Controls.Add(EscapeButton);
             Controls.Add(textBox1);
-            Controls.Add(label1);
-            Name = "TestEndForm";
-            Text = "TestEndForm";
+            Name = "ResultForm";
+            Text = "Характеристика";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
         private TextBox textBox1;
-        private Button OKButton;
+        private Button EscapeButton;
     }
 }

@@ -7,26 +7,28 @@ namespace Psyche
     public partial class TestForm : Form
     {
         private int currentQuestionIndex = 0;
-        private Test Test;
-        private int TimeLeft = 30;
-        private DateTime TestStartDateTime;
-        private DateTime TestEndDateTime;
-        private List<bool?> Answers = new();
+        private readonly Test Test;
+        private int TimeLeft;
+        private DateTime StartTime;
+        private DateTime EndTime;
+        private readonly List<bool?> Answers = new();
+        private readonly User CurrentUser;
 
-        public TestForm(string testFilepath)
+        public TestForm(string testFilepath, User currentUser)
         {
             InitializeComponent();
-            this.Text = new FileInfo(testFilepath).Name.Replace(".json", string.Empty);
-
-            TestStartDateTime = DateTime.Now;
-
-            timer1.Start();
+            CurrentUser = currentUser;
 
             // парсим тест из файла
             TestParser tp = new();
             Test = tp.ParseTest(testFilepath);
 
+            Text = Test.Name;
+            TimeLeft = Test.TimeLimit;
+
             UpdateForm(Test.Questions[currentQuestionIndex]);
+            timer1.Start();
+            StartTime = DateTime.Now;
         }
 
         private void nextQuestionButton_Click(object sender, EventArgs e, bool? value)
@@ -35,14 +37,11 @@ namespace Psyche
             currentQuestionIndex++;
             if (currentQuestionIndex >= Test.Questions.Length)
             {
-                // завершить тест и открыть форму проверки уровня доступа
-
-                TestEndDateTime = DateTime.Now;
-
-                TestEndForm testEndForm = new();
+                EndTime = DateTime.Now;
+                TestEndForm testEndForm = new(CurrentUser, Answers);
                 testEndForm.Show();
 
-                this.Close();
+                Close();
                 return;
             }
 
@@ -57,9 +56,9 @@ namespace Psyche
             foreach (var variant in question.Variants)
             {
                 string buttonKey = "btn" + i;
-                if (this.Controls.ContainsKey(buttonKey))
+                if (Controls.ContainsKey(buttonKey))
                 {
-                    this.Controls.RemoveByKey(buttonKey);
+                    Controls.RemoveByKey(buttonKey);
                 }
                 Button button = new()
                 {   
@@ -71,7 +70,7 @@ namespace Psyche
                 {
                     nextQuestionButton_Click(sender, EventArgs, variant.Value);
                 };
-                this.Controls.Add(button);
+                Controls.Add(button);
 
                 i++;
             }
@@ -81,8 +80,8 @@ namespace Psyche
         {
             if (TimeLeft > 0)
             {
-                TimeLeft--;
                 timerLable.Text = "Таймер: " + TimeLeft;
+                TimeLeft--;
             }
             else
             {

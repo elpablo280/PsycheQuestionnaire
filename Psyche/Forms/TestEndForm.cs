@@ -1,29 +1,34 @@
-﻿namespace Psyche.Forms
+﻿using Psyche.Models;
+
+namespace Psyche.Forms
 {
     public partial class TestEndForm : Form
     {
-        private string Password = "1111";
+        private readonly string Password = "1111";
+        private readonly User CurrentUser;
+        private readonly List<bool?> Answers = new();
 
-        public TestEndForm()
+        public TestEndForm(User currentUser, List<bool?> answers)
         {
             InitializeComponent();
+            CurrentUser = currentUser;
+            Answers = answers;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OKButton_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == Password)
             {
-                // добавить переход в меню действий после завершения теста
-                MessageBox.Show("Здесь должен быть переход в меню действий после завершения теста");
+                AfterTestForm afterTestForm = new AfterTestForm(CurrentUser);
+                afterTestForm.Show();
 
                 //beginWorkButton_Click(sender, e);
 
-                this.Close();
+                Close();
             }
             else
             {
                 MessageBox.Show("Неверный пароль");
-
                 textBox1.Text = string.Empty;
             }
         }

@@ -125,7 +125,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main Menu";
             WindowState = FormWindowState.Maximized;
-            Load += MainMenu_Load;
             ResumeLayout(false);
             PerformLayout();
         }

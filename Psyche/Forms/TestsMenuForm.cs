@@ -1,18 +1,19 @@
 ﻿using Psyche.Models;
-using Psyche.Workers;
 
 namespace Psyche
 {
     public partial class TestsMenuForm : Form
     {
-        readonly Queue<string> TestsQueue = new();
+        private readonly Queue<string> TestsQueue = new();
+        private readonly Config Config;
 
-        public TestsMenuForm()
+        public TestsMenuForm(Config config)
         {
             InitializeComponent();
 
-            Config? config = new ConfigWorker().GetConfig();
-            string[] tests = Directory.GetFiles(config.TestsFilepath);
+            Config = config;
+
+            string[] tests = Directory.GetFiles(Config.TestsFilepath);
 
             int i = 1;
             foreach (string test in tests)
@@ -29,7 +30,7 @@ namespace Psyche
                     listBox1.Items.Add(testName);
                     TestsQueue.Enqueue(fileInfo.FullName);
                 };
-                this.Controls.Add(Button);
+                Controls.Add(Button);
                 i++;
             }
         }
@@ -51,7 +52,7 @@ namespace Psyche
 
             // todo
 
-            DataEntryForm dataEntryForm = new(currentTest);
+            DataEntryForm dataEntryForm = new(currentTest, Config);
             dataEntryForm.Show();
         }
 
