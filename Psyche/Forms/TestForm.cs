@@ -1,4 +1,5 @@
-﻿using Psyche.Forms;
+﻿using Microsoft.Data.Sqlite;
+using Psyche.Forms;
 using Psyche.Models;
 using Psyche.Workers;
 
@@ -13,11 +14,13 @@ namespace Psyche
         private DateTime EndTime;
         private readonly List<bool?> Answers = new();
         private readonly User CurrentUser;
+        private readonly Config Config;
 
-        public TestForm(string testFilepath, User currentUser)
+        public TestForm(string testFilepath, User currentUser, Config config)
         {
             InitializeComponent();
             CurrentUser = currentUser;
+            Config = config;
 
             // парсим тест из файла
             TestParser tp = new();
@@ -38,8 +41,49 @@ namespace Psyche
             if (currentQuestionIndex >= Test.Questions.Length)
             {
                 EndTime = DateTime.Now;
-                TestEndForm testEndForm = new(CurrentUser, Answers);
+                TestEndForm testEndForm = new(CurrentUser, Answers, Config);
                 testEndForm.Show();
+
+                // собираем строки для автогенерации и автозаполнения таблицы
+                string createTableString1 = "";
+                string createTableString2 = "";
+                string insertTableString = "";
+                for (int i = 0; i < Answers.Count; i++)
+                {
+                    createTableString1 += $"Question{i + 1} TEXT NOT NULL, ";
+                    createTableString2 += $"Question{i + 1}, ";
+                    insertTableString += $"{Answers[i].Value.ToString()}, ";
+                }
+                // убираем "хвост" из строк (который ", ")
+                createTableString1 = createTableString1.Remove(createTableString1.Length - 2);
+                createTableString2 = createTableString2.Remove(createTableString2.Length - 2);
+                insertTableString = insertTableString.Remove(insertTableString.Length - 2);
+
+                string FIO = $"{CurrentUser.LastName} {CurrentUser.FirstName} {CurrentUser.MiddleName}";
+
+                // todo создаём таблицу по текущему тесту (если её нет) и добавляем туда запись с результатом
+                using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
+                {
+                    connection.Open();
+
+                    // создаём таблицу (если она не создана) с тестом
+                    SqliteCommand commandCreate = new()
+                    {
+                        Connection = connection,
+                        CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserPlatoon TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
+                    };
+                    commandCreate.ExecuteNonQuery();
+                    MessageBox.Show($"Таблица {Test.NameDB} создана");
+
+                    // добавляем запись о прохождении теста в базу
+                    SqliteCommand commandInsert = new()
+                    {
+                        Connection = connection,
+                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Group}', '{StartTime.ToString()}', '{EndTime.ToString()}', {insertTableString})"
+                    };
+                    commandInsert.ExecuteNonQuery();
+                    MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
+                }
 
                 Close();
                 return;

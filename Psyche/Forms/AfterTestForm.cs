@@ -4,13 +4,15 @@ namespace Psyche.Forms
 {
     public partial class AfterTestForm : Form
     {
-        private User CurrentUser;
+        private readonly User CurrentUser;
+        private readonly Config Config;
 
-        public AfterTestForm(User currentUser)
+        public AfterTestForm(User currentUser, Config config)
         {
             InitializeComponent();
 
             CurrentUser = currentUser;
+            Config = config;
         }
 
         private void EndButton_Click(object sender, EventArgs e)
@@ -25,7 +27,7 @@ namespace Psyche.Forms
 
         private void ReadResultButton_Click(object sender, EventArgs e)
         {
-            ResultForm resultForm = new ResultForm(CurrentUser);
+            ResultForm resultForm = new ResultForm(CurrentUser, Config);
             resultForm.Show();
         }
     }

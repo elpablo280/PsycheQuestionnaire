@@ -50,21 +50,22 @@ namespace Psyche
                     if (reader.HasRows)       // если нашёл такого юзера
                     {
                         MessageBox.Show("Такой пользователь уже есть в базе данных!");
-                        return;
+                    }
+                    else
+                    {
+                        // добавляем юзера в базу
+                        SqliteCommand commandInsert = new()
+                        {
+                            Connection = connection,
+                            CommandText = $"INSERT INTO Users (Name, Platoon) VALUES ('{FIO}', '{user.Group}')"
+                        };
+                        commandInsert.ExecuteNonQuery();
+                        MessageBox.Show($"Новый пользователь добавлен в таблицу Users");
                     }
                 }
-
-                // добавляем юзера в базу
-                SqliteCommand commandInsert = new()
-                {
-                    Connection = connection,
-                    CommandText = $"INSERT INTO Users (Name, Platoon) VALUES ('{FIO}', '{user.Group}')"
-                };
-                int number = commandInsert.ExecuteNonQuery();
-                MessageBox.Show($"В таблицу Users добавлено объектов: {number}");
             }
 
-            TestForm currentTestForm = new(CurrentTestFilepath, user);
+            TestForm currentTestForm = new(CurrentTestFilepath, user, Config);
             currentTestForm.Show();
 
             Close();

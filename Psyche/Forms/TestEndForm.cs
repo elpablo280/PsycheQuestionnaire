@@ -7,19 +7,21 @@ namespace Psyche.Forms
         private readonly string Password = "1111";
         private readonly User CurrentUser;
         private readonly List<bool?> Answers = new();
+        private readonly Config Config;
 
-        public TestEndForm(User currentUser, List<bool?> answers)
+        public TestEndForm(User currentUser, List<bool?> answers, Config config)
         {
             InitializeComponent();
             CurrentUser = currentUser;
             Answers = answers;
+            Config = config;
         }
 
         private void OKButton_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == Password)
             {
-                AfterTestForm afterTestForm = new AfterTestForm(CurrentUser);
+                AfterTestForm afterTestForm = new AfterTestForm(CurrentUser, Config);
                 afterTestForm.Show();
 
                 //beginWorkButton_Click(sender, e);

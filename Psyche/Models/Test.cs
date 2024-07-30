@@ -3,8 +3,8 @@
     public class Test
     {
         public string? Name { get; set; }
+        public string? NameDB { get; set; }
         public int TimeLimit { get; set; }
         public Question[]? Questions { get; set; }
-        //public string? Result { get; set; }
     }
 }
