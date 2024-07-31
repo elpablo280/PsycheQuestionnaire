@@ -35,28 +35,51 @@ namespace Psyche
             }
         }
 
-        private void addTestButton_Click(object sender, EventArgs e, string text)
+        private void AddTestButton_Click(object sender, EventArgs e, string text)
         {
             listBox1.Items.Add(text);
             TestsQueue.Enqueue(text);
         }
 
-        public void beginWorkButton_Click(object sender, EventArgs e)
+        public void BeginWorkButton_Click(object sender, EventArgs e)
+        {
+            string? currentTest = DequeueTest();
+            if (currentTest is null)
+            {
+                return;
+            }
+
+            DataEntryForm dataEntryForm = new(currentTest, Config, this);
+            dataEntryForm.Show();
+        }
+
+        public bool SelectNextTest(User currentUser)
+        {
+            string? currentTest = DequeueTest();
+            if (currentTest is null)
+            {
+                return false;
+            }
+
+            TestForm currentTestForm = new(currentTest, currentUser, Config, this);
+            currentTestForm.Show();
+
+            return true;
+        }
+
+        public string? DequeueTest()
         {
             if (!TestsQueue.TryDequeue(out string currentTest))
             {
                 MessageBox.Show("Очередь тестов пуста!");
-                return;
+                return null;
             }
             listBox1.Items.RemoveAt(0);
 
-            // todo
-
-            DataEntryForm dataEntryForm = new(currentTest, Config);
-            dataEntryForm.Show();
+            return currentTest;
         }
 
-        private void clearQueueButton_Click(object sender, EventArgs e)
+        private void ClearQueueButton_Click(object sender, EventArgs e)
         {
             TestsQueue.Clear();
             listBox1.Items.Clear();

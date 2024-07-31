@@ -1,9 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
+using Psyche.Interfaces;
 using Psyche.Models;
 
 namespace Psyche.Handlers
 {
-    public class SR45Handler
+    public class SR45Handler : IHandler
     {
         private readonly Config Config;
         private readonly User CurrentUser;
@@ -16,6 +17,7 @@ namespace Psyche.Handlers
 
         public string GetResult()
         {
+            string result = $"Тест СР-45.{Environment.NewLine}";
             int resultL = 0;
             int resultSr = 0;
             try
@@ -36,7 +38,7 @@ namespace Psyche.Handlers
                     {
                         if (reader.HasRows)
                         {
-                            while (reader.Read())           // костыль
+                            while (reader.Read())           // todo костыль
                             {
                                 for (int i = 5; i < 50; i++)           // порядковые номера столбцов с ответами в таблице
                                 {
@@ -60,6 +62,41 @@ namespace Psyche.Handlers
                                 }
                                 break;
                             }
+                            if (resultL < 6)
+                            {
+                                result += $"Низкий показатель по шкале лжи. Полученные данные достоверны.{Environment.NewLine}";
+                            }
+                            else
+                            {
+                                result += $"Высокий показатель по шкале лжи. Полученные данные недостоверны.{Environment.NewLine}";
+                            }
+
+                            double resultSrCaclulated = resultSr / 35.0;
+
+                            if (resultSrCaclulated >= 0.01f && resultSrCaclulated <= 0.23f)
+                            {
+                                result += "Низкий уровень склонности к суицидальным реакциям";
+                            }
+                            else if (resultSrCaclulated >= 0.24f && resultSrCaclulated <= 0.38f)
+                            {
+                                result += "Суицидальная реакция может возникнуть только на фоне длительной психической травматизации и при реактивных состояниях психики.";
+                            }
+                            else if (resultSrCaclulated >= 0.39f && resultSrCaclulated <= 0.59f)
+                            {
+                                result += "«Потенциал» склонности к суицидальным реакциям не отличается высокой устойчивостью.";
+                            }
+                            else if (resultSrCaclulated >= 0.6f && resultSrCaclulated <= 0.74f)
+                            {
+                                result += "Группа суицидального риска с высоким уровнем проявления склонности к суицидальным реакциям (при нарушениях адаптации возможна суицидальная попытка или реализация саморазрушающего поведения).";
+                            }
+                            else if (resultSrCaclulated >= 0.75f && resultSrCaclulated <= 1f)
+                            {
+                                result += "Группа суицидального риска с очень высоким уровнем проявления склонности к суицидальным реакциям (ситуация внутреннего и внешнего конфликта, нуждаются в медико-психологической помощи).";
+                            }
+                            else
+                            {
+                                throw new Exception("Неправильный результат");
+                            }
                         }
                     }
                 }
@@ -67,44 +104,6 @@ namespace Psyche.Handlers
             catch (Exception ex)
             {
 
-            }
-
-            string result = "";
-
-            if (resultL < 6)
-            {
-                result = $"Низкий показатель по шкале лжи. Полученные данные достоверны.{Environment.NewLine}";
-            }
-            else
-            {
-                result = $"Высокий показатель по шкале лжи. Полученные данные недостоверны.{Environment.NewLine}";
-            }
-
-            double resultSrCaclulated = resultSr / 35.0;
-
-            if (resultSrCaclulated >= 0.01f && resultSrCaclulated <= 0.23f)
-            {
-                result += "Низкий уровень склонности к суицидальным реакциям";
-            }
-            else if (resultSrCaclulated >= 0.24f && resultSrCaclulated <= 0.38f)
-            {
-                result += "Суицидальная реакция может возникнуть только на фоне длительной психической травматизации и при реактивных состояниях психики.";
-            }
-            else if (resultSrCaclulated >= 0.39f && resultSrCaclulated <= 0.59f)
-            {
-                result += "«Потенциал» склонности к суицидальным реакциям не отличается высокой устойчивостью.";
-            }
-            else if (resultSrCaclulated >= 0.6f && resultSrCaclulated <= 0.74f)
-            {
-                result += "Группа суицидального риска с высоким уровнем проявления склонности к суицидальным реакциям (при нарушениях адаптации возможна суицидальная попытка или реализация саморазрушающего поведения).";
-            }
-            else if (resultSrCaclulated >= 0.75f && resultSrCaclulated <= 1f)
-            {
-                result += "Группа суицидального риска с очень высоким уровнем проявления склонности к суицидальным реакциям (ситуация внутреннего и внешнего конфликта, нуждаются в медико-психологической помощи).";
-            }
-            else
-            {
-                throw new Exception("Неправильный результат");
             }
 
             return result;

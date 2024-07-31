@@ -50,7 +50,7 @@
             beginWorkButton.TabIndex = 3;
             beginWorkButton.Text = "Начать работу";
             beginWorkButton.UseVisualStyleBackColor = true;
-            beginWorkButton.Click += beginWorkButton_Click;
+            beginWorkButton.Click += BeginWorkButton_Click;
             // 
             // clearQueueButton
             // 
@@ -60,7 +60,7 @@
             clearQueueButton.TabIndex = 4;
             clearQueueButton.Text = "Очистить очередь";
             clearQueueButton.UseVisualStyleBackColor = true;
-            clearQueueButton.Click += clearQueueButton_Click;
+            clearQueueButton.Click += ClearQueueButton_Click;
             // 
             // TestsMenuForm
             // 

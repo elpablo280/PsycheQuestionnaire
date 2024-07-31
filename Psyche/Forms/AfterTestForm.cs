@@ -27,8 +27,13 @@ namespace Psyche.Forms
 
         private void ReadResultButton_Click(object sender, EventArgs e)
         {
-            ResultForm resultForm = new ResultForm(CurrentUser, Config);
+            ResultForm resultForm = new(CurrentUser, Config);
             resultForm.Show();
+        }
+
+        private void NextRespondentButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

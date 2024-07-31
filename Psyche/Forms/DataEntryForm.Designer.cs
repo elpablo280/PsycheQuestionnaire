@@ -124,7 +124,7 @@
             beginTestButton.TabIndex = 9;
             beginTestButton.Text = "Начать тест";
             beginTestButton.UseVisualStyleBackColor = true;
-            beginTestButton.Click += beginTestButton_Click;
+            beginTestButton.Click += BeginTestButton_Click;
             // 
             // DataEntryForm
             // 

@@ -15,6 +15,11 @@ namespace Psyche.Forms
             CurrentUser = currentUser;
 
             SR45Handler sr45Handler = new(Config, CurrentUser);
+            Test1Handler test1Handler = new(Config, CurrentUser);
+            Test2Handler test2Handler = new(Config, CurrentUser);
+            string results = $"{sr45Handler.GetResult()}{Environment.NewLine}" +
+                            $"{test1Handler.GetResult()}{Environment.NewLine}" +
+                            $"{test2Handler.GetResult()}{Environment.NewLine}";
 
             textBox1.ScrollBars = ScrollBars.Both;
             textBox1.WordWrap = true;
@@ -25,7 +30,7 @@ namespace Psyche.Forms
                 $"Группа:{Environment.NewLine}" +
                 $"{currentUser.Group}{Environment.NewLine}" +
                 $"Результаты тестовых методик:{Environment.NewLine}" +
-                sr45Handler.GetResult();
+                results;
         }
 
         private void EscapeButton_Click(object sender, EventArgs e)

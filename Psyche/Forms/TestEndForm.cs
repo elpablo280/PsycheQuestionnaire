@@ -21,10 +21,8 @@ namespace Psyche.Forms
         {
             if (textBox1.Text == Password)
             {
-                AfterTestForm afterTestForm = new AfterTestForm(CurrentUser, Config);
+                AfterTestForm afterTestForm = new(CurrentUser, Config);
                 afterTestForm.Show();
-
-                //beginWorkButton_Click(sender, e);
 
                 Close();
             }

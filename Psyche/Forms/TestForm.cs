@@ -15,12 +15,14 @@ namespace Psyche
         private readonly List<bool?> Answers = new();
         private readonly User CurrentUser;
         private readonly Config Config;
+        private readonly TestsMenuForm TestsMenuForm;
 
-        public TestForm(string testFilepath, User currentUser, Config config)
+        public TestForm(string testFilepath, User currentUser, Config config, TestsMenuForm testsMenuForm)
         {
             InitializeComponent();
             CurrentUser = currentUser;
             Config = config;
+            TestsMenuForm = testsMenuForm;
 
             // парсим тест из файла
             TestParser tp = new();
@@ -34,15 +36,13 @@ namespace Psyche
             StartTime = DateTime.Now;
         }
 
-        private void nextQuestionButton_Click(object sender, EventArgs e, bool? value)
+        private void NextQuestionButton_Click(object sender, EventArgs e, bool? value)
         {
             Answers.Add(value);
             currentQuestionIndex++;
             if (currentQuestionIndex >= Test.Questions.Length)
             {
                 EndTime = DateTime.Now;
-                TestEndForm testEndForm = new(CurrentUser, Answers, Config);
-                testEndForm.Show();
 
                 // собираем строки для автогенерации и автозаполнения таблицы
                 string createTableString1 = "";
@@ -85,6 +85,12 @@ namespace Psyche
                     MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
                 }
 
+                if (!TestsMenuForm.SelectNextTest(CurrentUser))
+                {
+                    TestEndForm testEndForm = new(CurrentUser, Answers, Config);
+                    testEndForm.Show();
+                }
+
                 Close();
                 return;
             }
@@ -112,7 +118,7 @@ namespace Psyche
                 };
                 button.Click += (sender, EventArgs) =>
                 {
-                    nextQuestionButton_Click(sender, EventArgs, variant.Value);
+                    NextQuestionButton_Click(sender, EventArgs, variant.Value);
                 };
                 Controls.Add(button);
 

@@ -7,16 +7,18 @@ namespace Psyche
     {
         private readonly string CurrentTestFilepath;
         private readonly Config Config;
+        private readonly TestsMenuForm TestsMenuForm;
 
-        public DataEntryForm(string currentTestFilepath, Config config)
+        public DataEntryForm(string currentTestFilepath, Config config, TestsMenuForm testsMenuForm)
         {
             InitializeComponent();
             CurrentTestFilepath = currentTestFilepath;
             Config = config;
+            TestsMenuForm = testsMenuForm;
         }
 
         // добавляем (проверяем наличие) юзера в базу и запускаем тест
-        private void beginTestButton_Click(object sender, EventArgs e)
+        private void BeginTestButton_Click(object sender, EventArgs e)
         {
             User user = new(
                 lastNameTextBox.Text, 
@@ -60,12 +62,12 @@ namespace Psyche
                             CommandText = $"INSERT INTO Users (Name, Platoon) VALUES ('{FIO}', '{user.Group}')"
                         };
                         commandInsert.ExecuteNonQuery();
-                        MessageBox.Show($"Новый пользователь добавлен в таблицу Users");
+                        //MessageBox.Show($"Новый пользователь добавлен в таблицу Users");
                     }
                 }
             }
 
-            TestForm currentTestForm = new(CurrentTestFilepath, user, Config);
+            TestForm currentTestForm = new(CurrentTestFilepath, user, Config, TestsMenuForm);
             currentTestForm.Show();
 
             Close();

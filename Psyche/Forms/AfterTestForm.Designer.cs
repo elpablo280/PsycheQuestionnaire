@@ -32,8 +32,8 @@
             EndButton = new Button();
             EndAndExitButton = new Button();
             ReadResultButton = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            GetPresetResultsButton = new Button();
+            NextRespondentButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -76,31 +76,32 @@
             ReadResultButton.UseVisualStyleBackColor = true;
             ReadResultButton.Click += ReadResultButton_Click;
             // 
-            // button4
+            // GetPresetResultsButton
             // 
-            button4.Location = new Point(37, 157);
-            button4.Name = "button4";
-            button4.Size = new Size(287, 48);
-            button4.TabIndex = 4;
-            button4.Text = "Получить результаты профотбора";
-            button4.UseVisualStyleBackColor = true;
+            GetPresetResultsButton.Location = new Point(37, 157);
+            GetPresetResultsButton.Name = "GetPresetResultsButton";
+            GetPresetResultsButton.Size = new Size(287, 48);
+            GetPresetResultsButton.TabIndex = 4;
+            GetPresetResultsButton.Text = "Получить результаты профотбора";
+            GetPresetResultsButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // NextRespondentButton
             // 
-            button5.Location = new Point(37, 228);
-            button5.Name = "button5";
-            button5.Size = new Size(287, 48);
-            button5.TabIndex = 5;
-            button5.Text = "Следующий респондент";
-            button5.UseVisualStyleBackColor = true;
+            NextRespondentButton.Location = new Point(37, 228);
+            NextRespondentButton.Name = "NextRespondentButton";
+            NextRespondentButton.Size = new Size(287, 48);
+            NextRespondentButton.TabIndex = 5;
+            NextRespondentButton.Text = "Следующий респондент";
+            NextRespondentButton.UseVisualStyleBackColor = true;
+            NextRespondentButton.Click += NextRespondentButton_Click;
             // 
             // AfterTestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button5);
-            Controls.Add(button4);
+            Controls.Add(NextRespondentButton);
+            Controls.Add(GetPresetResultsButton);
             Controls.Add(ReadResultButton);
             Controls.Add(EndAndExitButton);
             Controls.Add(EndButton);
@@ -117,7 +118,7 @@
         private Button EndButton;
         private Button EndAndExitButton;
         private Button ReadResultButton;
-        private Button button4;
-        private Button button5;
+        private Button GetPresetResultsButton;
+        private Button NextRespondentButton;
     }
 }
