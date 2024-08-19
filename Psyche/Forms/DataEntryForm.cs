@@ -7,7 +7,7 @@ namespace Psyche
     {
         private readonly string CurrentTestFilepath;
         private readonly Config Config;
-        private readonly TestsMenuForm TestsMenuForm;
+        public readonly TestsMenuForm TestsMenuForm;
 
         public DataEntryForm(string currentTestFilepath, Config config, TestsMenuForm testsMenuForm)
         {
@@ -20,14 +20,12 @@ namespace Psyche
         // добавляем (проверяем наличие) юзера в базу и запускаем тест
         private void BeginTestButton_Click(object sender, EventArgs e)
         {
+            string FIO = $"{lastNameTextBox.Text} {firstNameTextBox.Text} {middleNameTextBox.Text}";
+
             User user = new(
-                lastNameTextBox.Text, 
-                firstNameTextBox.Text,
-                middleNameTextBox.Text,
+                FIO,
                 groupTextBox.Text
             );
-
-            string FIO = $"{user.LastName} {user.FirstName} {user.MiddleName}";
 
             using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
             {
@@ -45,7 +43,7 @@ namespace Psyche
                 SqliteCommand commandCheck = new()
                 {
                     Connection = connection,
-                    CommandText = $"SELECT * FROM Users WHERE Name='{FIO}' AND Platoon='{user.Group}'",
+                    CommandText = $"SELECT * FROM Users WHERE Name='{user.Name}' AND Platoon='{user.Platoon}'",
                 };
                 using (SqliteDataReader reader = commandCheck.ExecuteReader())
                 {
@@ -59,7 +57,7 @@ namespace Psyche
                         SqliteCommand commandInsert = new()
                         {
                             Connection = connection,
-                            CommandText = $"INSERT INTO Users (Name, Platoon) VALUES ('{FIO}', '{user.Group}')"
+                            CommandText = $"INSERT INTO Users (Name, Platoon) VALUES ('{FIO}', '{user.Platoon}')"
                         };
                         commandInsert.ExecuteNonQuery();
                         //MessageBox.Show($"Новый пользователь добавлен в таблицу Users");

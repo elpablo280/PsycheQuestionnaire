@@ -6,12 +6,13 @@ namespace Psyche
     {
         private readonly Queue<string> TestsQueue = new();
         private readonly Config Config;
+        public readonly MainMenu MainMenu;
 
-        public TestsMenuForm(Config config)
+        public TestsMenuForm(Config config, MainMenu mainMenu)
         {
             InitializeComponent();
-
             Config = config;
+            MainMenu = mainMenu;
 
             string[] tests = Directory.GetFiles(Config.TestsFilepath);
 

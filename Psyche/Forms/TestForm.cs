@@ -15,7 +15,7 @@ namespace Psyche
         private readonly List<bool?> Answers = new();
         private readonly User CurrentUser;
         private readonly Config Config;
-        private readonly TestsMenuForm TestsMenuForm;
+        readonly TestsMenuForm TestsMenuForm;
 
         public TestForm(string testFilepath, User currentUser, Config config, TestsMenuForm testsMenuForm)
         {
@@ -33,6 +33,9 @@ namespace Psyche
 
             UpdateForm(Test.Questions[currentQuestionIndex]);
             timer1.Start();
+
+            timerLable.Visible = TestsMenuForm.MainMenu.ShowTimer;
+
             StartTime = DateTime.Now;
         }
 
@@ -59,7 +62,7 @@ namespace Psyche
                 createTableString2 = createTableString2.Remove(createTableString2.Length - 2);
                 insertTableString = insertTableString.Remove(insertTableString.Length - 2);
 
-                string FIO = $"{CurrentUser.LastName} {CurrentUser.FirstName} {CurrentUser.MiddleName}";
+                string FIO = $"{CurrentUser.Name}";
 
                 // todo создаём таблицу по текущему тесту (если её нет) и добавляем туда запись с результатом
                 using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
@@ -79,20 +82,13 @@ namespace Psyche
                     SqliteCommand commandInsert = new()
                     {
                         Connection = connection,
-                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Group}', '{StartTime.ToString()}', '{EndTime.ToString()}', {insertTableString})"
+                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{StartTime.ToString()}', '{EndTime.ToString()}', {insertTableString})"
                     };
                     commandInsert.ExecuteNonQuery();
                     MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
                 }
 
-                if (!TestsMenuForm.SelectNextTest(CurrentUser))
-                {
-                    TestEndForm testEndForm = new(CurrentUser, Answers, Config);
-                    testEndForm.Show();
-                }
-
-                Close();
-                return;
+                SetNextTest();
             }
 
             UpdateForm(Test.Questions[currentQuestionIndex]);
@@ -126,6 +122,19 @@ namespace Psyche
             }
         }
 
+        private void SetNextTest()
+        {
+            // если больше нет тестов в очереди, переходим на завершающую форму
+            if (!TestsMenuForm.SelectNextTest(CurrentUser))
+            {
+                TestEndForm testEndForm = new(CurrentUser, Answers, Config);
+                testEndForm.Show();
+            }
+
+            Close();
+            return;
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (TimeLeft > 0)
@@ -136,8 +145,15 @@ namespace Psyche
             else
             {
                 timer1.Stop();
-                timerLable.Text = "Время вышло!";
-                MessageBox.Show("You didn't finish in time.", "Sorry!");
+                if (TestsMenuForm.MainMenu.GoToNextTestWhenTimerIsOver)
+                {
+                    SetNextTest();
+                }
+                else
+                {
+                    timerLable.Text = "Время вышло!";
+                    MessageBox.Show("You didn't finish in time.", "Sorry!");
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Psyche.Forms
 {
-    partial class ResultForm
+    partial class CreditsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,36 +29,30 @@
         private void InitializeComponent()
         {
             textBox1 = new TextBox();
-            EscapeButton = new Button();
             SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(8, 9);
+            textBox1.Location = new Point(9, 11);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(780, 389);
+            textBox1.Size = new Size(779, 427);
             textBox1.TabIndex = 0;
+            textBox1.Text = $"Добро пожаловать в Психею!{Environment.NewLine}" +
+                $"Данное десктоп-приложение представляет собой опросник с возможностью проходить тесты и смотреть их результаты, а также сохранять информацию в базе данных.{Environment.NewLine}{Environment.NewLine}" +
+                $"Над программой работали:{Environment.NewLine}{Environment.NewLine}" +
+                $"Казак Павел{Environment.NewLine}" +
+                $"Филоненко Максим (нихуя не работал){Environment.NewLine}{Environment.NewLine}" +
+                $"Исходный код проекта:{Environment.NewLine}https://github.com/elpablo280/PsycheQuestionnaire";
             // 
-            // EscapeButton
-            // 
-            EscapeButton.Location = new Point(616, 404);
-            EscapeButton.Name = "EscapeButton";
-            EscapeButton.Size = new Size(172, 34);
-            EscapeButton.TabIndex = 1;
-            EscapeButton.Text = "Закрыть";
-            EscapeButton.UseVisualStyleBackColor = true;
-            EscapeButton.Click += EscapeButton_Click;
-            // 
-            // ResultForm
+            // CreditsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(EscapeButton);
             Controls.Add(textBox1);
-            Name = "ResultForm";
-            Text = "Характеристика";
+            Name = "CreditsForm";
+            Text = "CreditsForm";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -66,6 +60,5 @@
         #endregion
 
         private TextBox textBox1;
-        private Button EscapeButton;
     }
 }

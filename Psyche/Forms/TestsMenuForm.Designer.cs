@@ -72,7 +72,7 @@
             Controls.Add(listBox1);
             Name = "TestsMenuForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Tests Tab";
+            Text = "Выберите тесты для прохождения";
             ResumeLayout(false);
         }
 

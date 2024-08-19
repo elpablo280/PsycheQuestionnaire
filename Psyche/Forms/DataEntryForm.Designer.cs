@@ -142,7 +142,7 @@
             Controls.Add(lastNameTextBox);
             Controls.Add(label1);
             Name = "DataEntryForm";
-            Text = "DataEntryForm";
+            Text = "Введите данные";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -28,65 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            beginWorkButton = new Button();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            BeginWorkButton = new Button();
+            ResultsButton = new Button();
+            SettingsButton = new Button();
+            PresetsButton = new Button();
+            ClearDBButton = new Button();
+            CreditsButton = new Button();
             label1 = new Label();
             label2 = new Label();
             SuspendLayout();
             // 
-            // beginWorkButton
+            // BeginWorkButton
             // 
-            beginWorkButton.Anchor = AnchorStyles.None;
-            beginWorkButton.Location = new Point(455, 123);
-            beginWorkButton.Name = "beginWorkButton";
-            beginWorkButton.Size = new Size(159, 46);
-            beginWorkButton.TabIndex = 0;
-            beginWorkButton.Text = "Начать работу";
-            beginWorkButton.UseVisualStyleBackColor = true;
-            beginWorkButton.Click += beginWorkButton_Click;
+            BeginWorkButton.Anchor = AnchorStyles.None;
+            BeginWorkButton.Location = new Point(454, 90);
+            BeginWorkButton.Name = "BeginWorkButton";
+            BeginWorkButton.Size = new Size(159, 46);
+            BeginWorkButton.TabIndex = 0;
+            BeginWorkButton.Text = "Начать работу";
+            BeginWorkButton.UseVisualStyleBackColor = true;
+            BeginWorkButton.Click += BeginWorkButton_Click;
             // 
-            // button1
+            // ResultsButton
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(455, 201);
-            button1.Name = "button1";
-            button1.Size = new Size(159, 46);
-            button1.TabIndex = 1;
-            button1.Text = "Настройки";
-            button1.UseVisualStyleBackColor = true;
+            ResultsButton.Anchor = AnchorStyles.None;
+            ResultsButton.Location = new Point(454, 166);
+            ResultsButton.Margin = new Padding(3, 2, 3, 2);
+            ResultsButton.Name = "ResultsButton";
+            ResultsButton.Size = new Size(159, 45);
+            ResultsButton.TabIndex = 7;
+            ResultsButton.Text = "Результаты";
+            ResultsButton.UseVisualStyleBackColor = true;
+            ResultsButton.Click += ResultsButton_Click;
             // 
-            // button2
+            // SettingsButton
             // 
-            button2.Anchor = AnchorStyles.None;
-            button2.Location = new Point(455, 279);
-            button2.Name = "button2";
-            button2.Size = new Size(159, 46);
-            button2.TabIndex = 2;
-            button2.Text = "Профотбор";
-            button2.UseVisualStyleBackColor = true;
+            SettingsButton.Anchor = AnchorStyles.None;
+            SettingsButton.Location = new Point(454, 241);
+            SettingsButton.Name = "SettingsButton";
+            SettingsButton.Size = new Size(159, 46);
+            SettingsButton.TabIndex = 1;
+            SettingsButton.Text = "Настройки";
+            SettingsButton.UseVisualStyleBackColor = true;
+            SettingsButton.Click += SettingsButton_Click;
             // 
-            // button3
+            // PresetsButton
             // 
-            button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(455, 357);
-            button3.Name = "button3";
-            button3.Size = new Size(159, 46);
-            button3.TabIndex = 3;
-            button3.Text = "Очистить данные";
-            button3.UseVisualStyleBackColor = true;
+            PresetsButton.Anchor = AnchorStyles.None;
+            PresetsButton.Location = new Point(454, 317);
+            PresetsButton.Name = "PresetsButton";
+            PresetsButton.Size = new Size(159, 46);
+            PresetsButton.TabIndex = 2;
+            PresetsButton.Text = "Профотбор";
+            PresetsButton.UseVisualStyleBackColor = true;
+            PresetsButton.Click += PresetsButton_Click;
             // 
-            // button4
+            // ClearDBButton
             // 
-            button4.Anchor = AnchorStyles.None;
-            button4.Location = new Point(455, 435);
-            button4.Name = "button4";
-            button4.Size = new Size(159, 46);
-            button4.TabIndex = 4;
-            button4.Text = "О программе";
-            button4.UseVisualStyleBackColor = true;
+            ClearDBButton.Anchor = AnchorStyles.None;
+            ClearDBButton.Location = new Point(454, 393);
+            ClearDBButton.Name = "ClearDBButton";
+            ClearDBButton.Size = new Size(159, 46);
+            ClearDBButton.TabIndex = 3;
+            ClearDBButton.Text = "Очистить данные";
+            ClearDBButton.UseVisualStyleBackColor = true;
+            // 
+            // CreditsButton
+            // 
+            CreditsButton.Anchor = AnchorStyles.None;
+            CreditsButton.Location = new Point(454, 469);
+            CreditsButton.Name = "CreditsButton";
+            CreditsButton.Size = new Size(159, 46);
+            CreditsButton.TabIndex = 4;
+            CreditsButton.Text = "О программе";
+            CreditsButton.UseVisualStyleBackColor = true;
+            CreditsButton.Click += CreditsButton_Click;
             // 
             // label1
             // 
@@ -96,7 +112,7 @@
             label1.Name = "label1";
             label1.Size = new Size(134, 15);
             label1.TabIndex = 5;
-            label1.Text = "Психея pre-alpha v0.0.1";
+            label1.Text = "Психея pre-alpha v0.0.2";
             // 
             // label2
             // 
@@ -113,17 +129,18 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1068, 610);
+            Controls.Add(ResultsButton);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(beginWorkButton);
+            Controls.Add(CreditsButton);
+            Controls.Add(ClearDBButton);
+            Controls.Add(PresetsButton);
+            Controls.Add(SettingsButton);
+            Controls.Add(BeginWorkButton);
             Name = "MainMenu";
             SizeGripStyle = SizeGripStyle.Show;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Main Menu";
+            Text = "Главное меню";
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
@@ -131,12 +148,13 @@
 
         #endregion
 
-        private Button beginWorkButton;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button BeginWorkButton;
+        private Button SettingsButton;
+        private Button PresetsButton;
+        private Button ClearDBButton;
+        private Button CreditsButton;
         private Label label1;
         private Label label2;
+        private Button ResultsButton;
     }
 }

@@ -107,7 +107,7 @@
             Controls.Add(EndButton);
             Controls.Add(label1);
             Name = "AfterTestForm";
-            Text = "AfterTestForm";
+            Text = "Выберите дальнейшее действие";
             ResumeLayout(false);
             PerformLayout();
         }

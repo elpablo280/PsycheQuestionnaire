@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Psyche.Interfaces;
 using Psyche.Models;
 
@@ -15,6 +16,22 @@ namespace Psyche.Handlers
             CurrentUser = currentUser;
         }
 
+        public IEnumerable<Sr45>? GetResultTab()
+        {
+            IEnumerable<Sr45>? result = null;
+
+            using (DBContext context = new())
+            {
+                context.Database.EnsureCreated();
+
+                //context.Sr45s.Load();
+
+                result = context.Sr45s;
+            }
+
+            return result;
+        }
+
         public string GetResult()
         {
             string result = $"Тест СР-45.{Environment.NewLine}";
@@ -26,13 +43,13 @@ namespace Psyche.Handlers
                 {
                     connection.Open();
 
-                    string FIO = $"{CurrentUser.LastName} {CurrentUser.FirstName} {CurrentUser.MiddleName}";
+                    string FIO = $"{CurrentUser.Name}";
 
                     // todo
                     SqliteCommand commandCheck = new()
                     {
                         Connection = connection,
-                        CommandText = $"SELECT * FROM SR45 WHERE UserName='{FIO}' AND UserPlatoon='{CurrentUser.Group}'",
+                        CommandText = $"SELECT * FROM SR45 WHERE UserName='{FIO}' AND UserPlatoon='{CurrentUser.Platoon}'",
                     };
                     using (SqliteDataReader reader = commandCheck.ExecuteReader())
                     {

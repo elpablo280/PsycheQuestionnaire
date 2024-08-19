@@ -1,18 +1,16 @@
-﻿namespace Psyche.Models
-{
-    public class User
-    {
-        public string LastName { get; set; }          // фамилия
-        public string FirstName { get; set; }          // имя
-        public string MiddleName { get; set; }         // отчество
-        public string Group { get; set; }
+﻿namespace Psyche.Models;
 
-        public User(string lastName, string firstName, string middleName, string group)
-        {
-            LastName = lastName;
-            FirstName = firstName;
-            MiddleName = middleName;
-            Group = group;
-        }
+public partial class User
+{
+    public long Id { get; set; }
+
+    public string Name { get; set; }
+
+    public string Platoon { get; set; }
+
+    public User(string name, string platoon)
+    {
+        Name = name;
+        Platoon = platoon;
     }
 }
