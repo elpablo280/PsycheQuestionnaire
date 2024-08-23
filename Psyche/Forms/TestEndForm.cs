@@ -4,12 +4,12 @@ namespace Psyche.Forms
 {
     public partial class TestEndForm : Form
     {
-        private readonly string Password = "1111";
+        private readonly string Password = "1111";            // todo
         private readonly User CurrentUser;
-        private readonly List<bool?> Answers = new();
+        private readonly List<int> Answers = new();
         private readonly Config Config;
 
-        public TestEndForm(User currentUser, List<bool?> answers, Config config)
+        public TestEndForm(User currentUser, List<int> answers, Config config)
         {
             InitializeComponent();
             CurrentUser = currentUser;

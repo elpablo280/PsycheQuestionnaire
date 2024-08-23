@@ -27,7 +27,7 @@ namespace Psyche
                 Button.Click += (sender, EventArgs) =>
                 {
                     // вывод окна с таблицей результатов прохождения теста
-                    ResultTabForm resultTabForm = new(Config);
+                    ResultTabForm resultTabForm = new(Config, testName);
                     resultTabForm.Show();
                 };
                 Controls.Add(Button);

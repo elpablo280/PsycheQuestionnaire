@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Psyche.Forms;
+using Psyche.Handlers;
 using Psyche.Models;
 using Psyche.Workers;
 
@@ -12,7 +13,7 @@ namespace Psyche
         private int TimeLeft;
         private DateTime StartTime;
         private DateTime EndTime;
-        private readonly List<bool?> Answers = new();
+        private readonly List<int> Answers = new();
         private readonly User CurrentUser;
         private readonly Config Config;
         readonly TestsMenuForm TestsMenuForm;
@@ -39,10 +40,11 @@ namespace Psyche
             StartTime = DateTime.Now;
         }
 
-        private void NextQuestionButton_Click(object sender, EventArgs e, bool? value)
+        private void NextQuestionButton_Click(object sender, EventArgs e, int value)
         {
             Answers.Add(value);
             currentQuestionIndex++;
+            // создаём таблицу, высчитываем и записываем результат в конце теста
             if (currentQuestionIndex >= Test.Questions.Length)
             {
                 EndTime = DateTime.Now;
@@ -51,11 +53,27 @@ namespace Psyche
                 string createTableString1 = "";
                 string createTableString2 = "";
                 string insertTableString = "";
+                string resultString = "";
+
+                switch (Test.Name)
+                {
+                    case "Тест СР-45":
+                        resultString = $"{new SR45Handler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Тест КОС-2":
+                        resultString = $"{new KOS2Handler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    default:
+                        resultString = "Ошибка!";
+                        break;        // todo
+                }
+
+
                 for (int i = 0; i < Answers.Count; i++)
                 {
-                    createTableString1 += $"Question{i + 1} TEXT NOT NULL, ";
+                    createTableString1 += $"Question{i + 1} INTEGER NOT NULL, ";
                     createTableString2 += $"Question{i + 1}, ";
-                    insertTableString += $"{Answers[i].Value.ToString()}, ";
+                    insertTableString += $"{Answers[i]}, ";
                 }
                 // убираем "хвост" из строк (который ", ")
                 createTableString1 = createTableString1.Remove(createTableString1.Length - 2);
@@ -73,7 +91,7 @@ namespace Psyche
                     SqliteCommand commandCreate = new()
                     {
                         Connection = connection,
-                        CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserPlatoon TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
+                        CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserPlatoon TEXT NOT NULL, Result TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
                     };
                     commandCreate.ExecuteNonQuery();
                     MessageBox.Show($"Таблица {Test.NameDB} создана");
@@ -82,13 +100,14 @@ namespace Psyche
                     SqliteCommand commandInsert = new()
                     {
                         Connection = connection,
-                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{StartTime.ToString()}', '{EndTime.ToString()}', {insertTableString})"
+                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, Result, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{resultString}', '{StartTime}', '{EndTime}', {insertTableString})"
                     };
                     commandInsert.ExecuteNonQuery();
                     MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
                 }
 
                 SetNextTest();
+                return;
             }
 
             UpdateForm(Test.Questions[currentQuestionIndex]);
@@ -132,7 +151,6 @@ namespace Psyche
             }
 
             Close();
-            return;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

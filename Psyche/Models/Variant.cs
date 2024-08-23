@@ -2,7 +2,7 @@
 {
     public class Variant
     {
-        public string? Text { get; set; }
-        public bool? Value { get; set; }
+        public string Text { get; set; }
+        public int Value { get; set; }
     }
 }
