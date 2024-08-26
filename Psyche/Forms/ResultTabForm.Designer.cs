@@ -36,6 +36,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 11);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
@@ -46,6 +47,7 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button1.Location = new Point(1236, 567);
             button1.Name = "button1";
             button1.Size = new Size(180, 69);
@@ -55,6 +57,7 @@
             // 
             // button2
             // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button2.Location = new Point(1043, 567);
             button2.Name = "button2";
             button2.Size = new Size(187, 69);

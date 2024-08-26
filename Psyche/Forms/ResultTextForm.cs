@@ -1,4 +1,5 @@
-﻿using Psyche.Handlers;
+﻿using Microsoft.Data.Sqlite;
+using Psyche.Handlers;
 using Psyche.Models;
 
 namespace Psyche.Forms
@@ -22,11 +23,10 @@ namespace Psyche.Forms
 
             //        string FIO = $"{CurrentUser.Name}";
 
-            //        // todo
             //        SqliteCommand commandCheck = new()
             //        {
             //            Connection = connection,
-            //            CommandText = $"SELECT * FROM SR45 WHERE UserName='{FIO}' AND UserPlatoon='{CurrentUser.Platoon}'",
+            //            CommandText = $"SELECT Result FROM SR45 WHERE UserName='{FIO}' AND UserPlatoon='{CurrentUser.Platoon}'",
             //        };
             //        using (SqliteDataReader reader = commandCheck.ExecuteReader())
             //        {
@@ -34,27 +34,7 @@ namespace Psyche.Forms
             //            {
             //                while (reader.Read())           // todo костыль
             //                {
-            //                    for (int i = 5; i < 50; i++)           // порядковые номера столбцов с ответами в таблице
-            //                    {
-            //                        if (i == 14 ||
-            //                            i == 15 ||
-            //                            i == 21 ||
-            //                            i == 24 ||
-            //                            i == 26 ||
-            //                            i == 28 ||
-            //                            i == 32 ||
-            //                            i == 37 ||
-            //                            i == 42 ||
-            //                            i == 45)
-            //                        {
-            //                            resultL += Convert.ToInt32(reader.GetValue(i));
-            //                        }
-            //                        else
-            //                        {
-            //                            resultSr += Convert.ToInt32(reader.GetValue(i));
-            //                        }
-            //                    }
-            //                    break;
+            //                    reader.GetValue(i);
             //                }
             //            }
             //        }

@@ -33,15 +33,15 @@ namespace Psyche.Handlers
 
             if (resultS <= 30)
             {
-                resultSstring += $"{resultS} (до 30 баллов – низкая)";
+                resultSstring += $"{resultS} (до 30 баллов – низкая). ";
             }
             else if (resultS >= 31 && resultS <= 44)
             {
-                resultSstring += $"{resultS} (31 - 44 балла - умеренная)";
+                resultSstring += $"{resultS} (31 - 44 балла - умеренная). ";
             }
             else if (resultS >= 45)
             {
-                resultSstring += $"{resultS} (45 и более - высокая)";
+                resultSstring += $"{resultS} (45 и более - высокая). ";
             }
             else
             {
@@ -50,15 +50,15 @@ namespace Psyche.Handlers
 
             if (resultL <= 30)
             {
-                resultLstring += $"{resultL} (до 30 баллов – низкая)";
+                resultLstring += $"{resultL} (до 30 баллов – низкая). ";
             }
             else if (resultL >= 31 && resultL <= 44)
             {
-                resultLstring += $"{resultL} (31 - 44 балла - умеренная)";
+                resultLstring += $"{resultL} (31 - 44 балла - умеренная). ";
             }
             else if (resultL >= 45)
             {
-                resultLstring += $"{resultL} (45 и более - высокая)";
+                resultLstring += $"{resultL} (45 и более - высокая). ";
             }
             else
             {

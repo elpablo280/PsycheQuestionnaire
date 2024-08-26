@@ -35,6 +35,7 @@
             // 
             // listBox1
             // 
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(797, 12);
@@ -44,6 +45,7 @@
             // 
             // beginWorkButton
             // 
+            beginWorkButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             beginWorkButton.Location = new Point(798, 537);
             beginWorkButton.Name = "beginWorkButton";
             beginWorkButton.Size = new Size(244, 68);
@@ -54,6 +56,7 @@
             // 
             // clearQueueButton
             // 
+            clearQueueButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             clearQueueButton.Location = new Point(798, 463);
             clearQueueButton.Name = "clearQueueButton";
             clearQueueButton.Size = new Size(244, 68);

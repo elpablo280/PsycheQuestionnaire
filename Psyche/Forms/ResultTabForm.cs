@@ -45,7 +45,16 @@ namespace Psyche.Forms
             con.Open(); // открываешь соединение с БД
             cmd.CommandText = $"Select * from {TestName}";
             dt.Clear();
-            dt.Load(cmd.ExecuteReader()); // выполняешь SQL-запрос
+            // todo если ещё нет таблицы
+            try
+            {
+                dt.Load(cmd.ExecuteReader()); // выполняешь SQL-запрос
+            }
+            catch
+            {
+                //MessageBox.Show("Произошла ошибка при подключении к базе данных. Возможно, такой таблицы ещё не существует. Таблица создаётся после первого прохождения теста.");
+                //Close();
+            }
             con.Close(); // закрываешь соединение с БД
         }
     }

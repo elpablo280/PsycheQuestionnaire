@@ -63,11 +63,16 @@ namespace Psyche
                     case "Тест КОС-2":
                         resultString = $"{new KOS2Handler(Answers).GetResult()}{Environment.NewLine}";
                         break;
+                    case "Шкала тревоги Спилберга":
+                        resultString = $"{new STAIHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Тест Прогноз-2-02":
+                        resultString = $"{new Prognoz202Handler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
                     default:
-                        resultString = "Ошибка!";
-                        break;        // todo
+                        resultString = "Ошибка! Надо внести тест в TestForm";
+                        break;        // todo добавлять тесты сюда тоже
                 }
-
 
                 for (int i = 0; i < Answers.Count; i++)
                 {
@@ -126,10 +131,13 @@ namespace Psyche
                     Controls.RemoveByKey(buttonKey);
                 }
                 Button button = new()
-                {   
+                {
                     Name = buttonKey,
-                    Location = new Point(10 + 100 * i, 50),
-                    Text = variant.Text
+                    Location = new Point(10 + i, 50),
+                    //Location = new Point(10 + 100 * i, 50),
+                    Text = variant.Text,
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowOnly
                 };
                 button.Click += (sender, EventArgs) =>
                 {
@@ -137,7 +145,7 @@ namespace Psyche
                 };
                 Controls.Add(button);
 
-                i++;
+                i += button.Width + 10;            // задаём сдвиг для следующей кнопки
             }
         }
 
