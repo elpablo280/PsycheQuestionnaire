@@ -21,9 +21,14 @@ namespace Psyche
                 FileInfo fileInfo = new(test);
                 string testName = fileInfo.Name.Replace(".json", string.Empty);        // todo
 
-                Button Button = new();
-                Button.Location = new Point(10, 30 * i);
-                Button.Text = testName;
+                Button Button = new()
+                {
+                    Location = new Point(10, 30 * i),
+                    Text = testName,
+                    Width = 200
+                    //AutoSize = true,
+                    //AutoSizeMode = AutoSizeMode.GrowOnly
+                };
                 Button.Click += (sender, EventArgs) =>
                 {
                     // вывод окна с таблицей результатов прохождения теста
