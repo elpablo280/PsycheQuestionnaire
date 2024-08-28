@@ -11,6 +11,8 @@ namespace Psyche.Handlers
             Answers = answers;
         }
 
+        private readonly int[] indexesI = { 1, 5, 11, 14, 18, 20, 25, 32, 37, 43, 48, 51, 57, 60 };
+
         public string GetResult()
         {
             string result = $"Тест Прогноз-2-02. {Environment.NewLine}";
@@ -21,20 +23,7 @@ namespace Psyche.Handlers
 
             for (int i = 0; i < Answers.Count; i++)           // порядковые номера столбцов с ответами в таблице
             {
-                if (i is 1 or
-                    5 or
-                    11 or
-                    14 or
-                    18 or
-                    20 or
-                    25 or
-                    32 or
-                    37 or
-                    43 or
-                    48 or
-                    51 or
-                    57 or
-                    60)
+                if (indexesI.Contains(i))
                 {
                     resultI += Answers[i];
                 }
@@ -53,7 +42,6 @@ namespace Psyche.Handlers
             {
                 resultIstring += $"{resultI}, использовать данные анкеты не рекомендуется (>= 10). ";
             }
-
 
             if (resultNPU >= 35)
             {

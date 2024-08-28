@@ -69,6 +69,27 @@ namespace Psyche
                     case "Тест Прогноз-2-02":
                         resultString = $"{new Prognoz202Handler(Answers).GetResult()}{Environment.NewLine}";
                         break;
+                    case "Типы поведения в конфликте (К. Томас)":
+                        resultString = $"{new ConflictTomasHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Методика диагностики соц.-псих. установок личности":
+                        resultString = $"{new PotemkinaHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Методика Айзенка по определению темперамента":
+                        resultString = $"{new IsenkTemperamentHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Опросник Леонгарда-Шмишека":
+                        resultString = $"{new LeongardShmishekHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Опросник Адаптивность-02":
+                        resultString = $"{new Adaptivnost02Handler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Личностная шкала проявления тревоги (Дж. Тейлор)":
+                        resultString = $"{new TrevogaTaylorHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Стратегии преодоления стрессовых ситуаций":
+                        resultString = $"{new SACSHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
                     default:
                         resultString = "Ошибка! Надо внести тест в TestForm";
                         break;        // todo добавлять тесты сюда тоже

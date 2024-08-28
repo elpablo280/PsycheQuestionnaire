@@ -50,9 +50,9 @@ namespace Psyche.Forms
             {
                 dt.Load(cmd.ExecuteReader()); // выполняешь SQL-запрос
             }
-            catch
+            catch (Exception ex)
             {
-                //MessageBox.Show("Произошла ошибка при подключении к базе данных. Возможно, такой таблицы ещё не существует. Таблица создаётся после первого прохождения теста.");
+                MessageBox.Show($"Произошла ошибка при подключении к базе данных. {ex.Message}");
                 //Close();
             }
             con.Close(); // закрываешь соединение с БД
