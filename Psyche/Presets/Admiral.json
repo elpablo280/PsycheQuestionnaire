@@ -1,0 +1,8 @@
+{
+  "Name": "Рядовой",
+  "TestFilepaths": [
+    "C:\\Users\\kkaza\\source\\repos\\PsycheQuestionnaire\\Psyche\\Tests\\KOS2.json",
+    "C:\\Users\\kkaza\\source\\repos\\PsycheQuestionnaire\\Psyche\\Tests\\SACS.json",
+    "C:\\Users\\kkaza\\source\\repos\\PsycheQuestionnaire\\Psyche\\Tests\\STAI.json"
+  ]
+}

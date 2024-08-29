@@ -92,6 +92,7 @@
             ClearDBButton.TabIndex = 3;
             ClearDBButton.Text = "Очистить данные";
             ClearDBButton.UseVisualStyleBackColor = true;
+            ClearDBButton.Click += ClearDBButton_Click;
             // 
             // CreditsButton
             // 

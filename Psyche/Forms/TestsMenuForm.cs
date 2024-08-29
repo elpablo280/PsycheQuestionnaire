@@ -1,10 +1,12 @@
 ﻿using Psyche.Models;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Psyche
 {
     public partial class TestsMenuForm : Form
     {
-        private readonly Queue<string> TestsQueue = new();
+        private Queue<string> TestsQueue = new();
         private readonly Config Config;
         public readonly MainMenu MainMenu;
 
@@ -39,6 +41,34 @@ namespace Psyche
                 Controls.Add(Button);
                 i++;
             }
+        }
+
+        public TestsMenuForm(Config config, MainMenu mainMenu, string[] testFilepaths)                // todo костыль
+        {
+            InitializeComponent();
+            Config = config;
+            MainMenu = mainMenu;
+
+            foreach (var test in testFilepaths)
+            {
+                listBox1.Items.Add(test);
+                TestsQueue.Enqueue(test);
+            }
+
+            if (!TestsQueue.TryDequeue(out string currentTestFilepath))
+            {
+                MessageBox.Show("Очередь тестов пуста!");
+                return;
+            }
+            listBox1.Items.RemoveAt(0);
+
+            if (currentTestFilepath is null)
+            {
+                return;
+            }
+
+            DataEntryForm dataEntryForm = new(currentTestFilepath, Config, this);
+            dataEntryForm.Show();
         }
 
         private void AddTestButton_Click(object sender, EventArgs e, string text)

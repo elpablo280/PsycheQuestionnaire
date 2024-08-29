@@ -41,7 +41,7 @@ namespace Psyche
 
         private void PresetsButton_Click(object sender, EventArgs e)
         {
-            PresetsForm presetsForm = new();
+            PresetsForm presetsForm = new(Config, this);
             presetsForm.Show();
         }
 
@@ -51,10 +51,16 @@ namespace Psyche
             settingsForm.Show();
         }
 
+        private void ClearDBButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public void SetSettings(bool showTimer, bool goToNextTestWhenTimerIsOver)
         {
             ShowTimer = showTimer;
             GoToNextTestWhenTimerIsOver = goToNextTestWhenTimerIsOver;
         }
+
     }
 }

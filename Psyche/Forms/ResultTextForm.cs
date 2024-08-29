@@ -64,7 +64,7 @@ namespace Psyche.Forms
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"Произошла ошибка : {ex.Message}");
             }
 
             textBox1.ScrollBars = ScrollBars.Both;

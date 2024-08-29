@@ -3,6 +3,7 @@
     public class Config
     {
         public string TestsFilepath { get; set; }
+        public string PresetsFilepath { get; set; }
         public ConnectionStrings ConnectionStrings { get; set; }
     }
 
