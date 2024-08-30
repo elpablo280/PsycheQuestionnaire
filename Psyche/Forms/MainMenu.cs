@@ -53,7 +53,8 @@ namespace Psyche
 
         private void ClearDBButton_Click(object sender, EventArgs e)
         {
-
+            ClearDBForm clearDBForm = new(Config);
+            clearDBForm.Show();
         }
 
         public void SetSettings(bool showTimer, bool goToNextTestWhenTimerIsOver)

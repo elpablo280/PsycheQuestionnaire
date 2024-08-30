@@ -43,7 +43,7 @@ namespace Psyche
             }
         }
 
-        public TestsMenuForm(Config config, MainMenu mainMenu, string[] testFilepaths)                // todo костыль
+        public TestsMenuForm(Config config, MainMenu mainMenu, string[] testFilepaths)                // todo костыль для работы пресетов
         {
             InitializeComponent();
             Config = config;

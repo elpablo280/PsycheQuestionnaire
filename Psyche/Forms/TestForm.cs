@@ -175,7 +175,7 @@ namespace Psyche
             // если больше нет тестов в очереди, переходим на завершающую форму
             if (!TestsMenuForm.SelectNextTest(CurrentUser))
             {
-                TestEndForm testEndForm = new(CurrentUser, Answers, Config);
+                TestEndForm testEndForm = new(CurrentUser, Config);
                 testEndForm.Show();
             }
 

@@ -6,14 +6,12 @@ namespace Psyche.Forms
     {
         private readonly string Password = "1111";            // todo
         private readonly User CurrentUser;
-        private readonly List<int> Answers = new();
         private readonly Config Config;
 
-        public TestEndForm(User currentUser, List<int> answers, Config config)
+        public TestEndForm(User currentUser, Config config)
         {
             InitializeComponent();
             CurrentUser = currentUser;
-            Answers = answers;
             Config = config;
         }
 

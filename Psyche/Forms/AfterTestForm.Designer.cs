@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             EndButton = new Button();
             EndAndExitButton = new Button();
             ReadResultButton = new Button();
@@ -36,19 +35,10 @@
             NextRespondentButton = new Button();
             SuspendLayout();
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(92, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(613, 54);
-            label1.TabIndex = 0;
-            label1.Text = "Выберите дальнейшее действие";
-            // 
             // EndButton
             // 
-            EndButton.Location = new Point(590, 314);
+            EndButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            EndButton.Location = new Point(590, 313);
             EndButton.Name = "EndButton";
             EndButton.Size = new Size(198, 48);
             EndButton.TabIndex = 1;
@@ -58,7 +48,8 @@
             // 
             // EndAndExitButton
             // 
-            EndAndExitButton.Location = new Point(590, 383);
+            EndAndExitButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            EndAndExitButton.Location = new Point(590, 382);
             EndAndExitButton.Name = "EndAndExitButton";
             EndAndExitButton.Size = new Size(198, 52);
             EndAndExitButton.TabIndex = 2;
@@ -68,7 +59,7 @@
             // 
             // ReadResultButton
             // 
-            ReadResultButton.Location = new Point(37, 86);
+            ReadResultButton.Location = new Point(12, 12);
             ReadResultButton.Name = "ReadResultButton";
             ReadResultButton.Size = new Size(287, 48);
             ReadResultButton.TabIndex = 3;
@@ -78,7 +69,7 @@
             // 
             // GetPresetResultsButton
             // 
-            GetPresetResultsButton.Location = new Point(37, 157);
+            GetPresetResultsButton.Location = new Point(12, 83);
             GetPresetResultsButton.Name = "GetPresetResultsButton";
             GetPresetResultsButton.Size = new Size(287, 48);
             GetPresetResultsButton.TabIndex = 4;
@@ -87,7 +78,7 @@
             // 
             // NextRespondentButton
             // 
-            NextRespondentButton.Location = new Point(37, 228);
+            NextRespondentButton.Location = new Point(12, 154);
             NextRespondentButton.Name = "NextRespondentButton";
             NextRespondentButton.Size = new Size(287, 48);
             NextRespondentButton.TabIndex = 5;
@@ -105,16 +96,12 @@
             Controls.Add(ReadResultButton);
             Controls.Add(EndAndExitButton);
             Controls.Add(EndButton);
-            Controls.Add(label1);
             Name = "AfterTestForm";
             Text = "Выберите дальнейшее действие";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private Button EndButton;
         private Button EndAndExitButton;
         private Button ReadResultButton;
