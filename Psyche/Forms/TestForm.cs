@@ -90,6 +90,12 @@ namespace Psyche
                     case "Стратегии преодоления стрессовых ситуаций":
                         resultString = $"{new SACSHandler(Answers).GetResult()}{Environment.NewLine}";
                         break;
+                    case "Методика «Индекс жизненного стиля»":
+                        resultString = $"{new LSIHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Методика диагностики уровня профессионального выгорания Бойко":
+                        resultString = $"{new BurnoutBoykoHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
                     default:
                         resultString = "Ошибка! Надо внести тест в TestForm";
                         break;        // todo добавлять тесты сюда тоже
