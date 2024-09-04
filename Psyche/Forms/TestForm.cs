@@ -90,11 +90,14 @@ namespace Psyche
                     case "Стратегии преодоления стрессовых ситуаций":
                         resultString = $"{new SACSHandler(Answers).GetResult()}{Environment.NewLine}";
                         break;
-                    case "Методика «Индекс жизненного стиля»":
+                    case "Индекс жизненного стиля":
                         resultString = $"{new LSIHandler(Answers).GetResult()}{Environment.NewLine}";
                         break;
                     case "Методика диагностики уровня профессионального выгорания Бойко":
                         resultString = $"{new BurnoutBoykoHandler(Answers).GetResult()}{Environment.NewLine}";
+                        break;
+                    case "Опросник уровня агрессивности Басса-Дарки":
+                        resultString = $"{new BDHIHandler(Answers).GetResult()}{Environment.NewLine}";
                         break;
                     default:
                         resultString = "Ошибка! Надо внести тест в TestForm";
@@ -125,8 +128,9 @@ namespace Psyche
                         Connection = connection,
                         CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserPlatoon TEXT NOT NULL, Result TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
                     };
+                    
                     commandCreate.ExecuteNonQuery();
-                    MessageBox.Show($"Таблица {Test.NameDB} создана");
+                    //MessageBox.Show($"Таблица {Test.NameDB} создана");
 
                     // добавляем запись о прохождении теста в базу
                     SqliteCommand commandInsert = new()
@@ -135,7 +139,7 @@ namespace Psyche
                         CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, Result, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{resultString}', '{StartTime}', '{EndTime}', {insertTableString})"
                     };
                     commandInsert.ExecuteNonQuery();
-                    MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
+                    //MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
                 }
 
                 SetNextTest();

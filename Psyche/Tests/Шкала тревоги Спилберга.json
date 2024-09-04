@@ -1,7 +1,7 @@
 {
   // https://psy-resultat.ru/page144
   "Name": "Шкала тревоги Спилберга",
-  "NameDB": "STAI",
+  "NameDB": "Spilberg",
   "TimeLimit": 600,
   "Questions": [
     {

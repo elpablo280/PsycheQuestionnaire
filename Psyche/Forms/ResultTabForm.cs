@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Psyche.Models;
+using Psyche.Workers;
 using System.Data;
 
 namespace Psyche.Forms
@@ -16,6 +17,9 @@ namespace Psyche.Forms
             InitializeComponent();
             Config = config;
             TestName = testName;
+
+            TestParser testParser = new TestParser();
+            Test test = testParser.ParseTest(TestName);
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AllowUserToAddRows = false;
@@ -42,12 +46,12 @@ namespace Psyche.Forms
             DataTable dt = new();
             dataGridView1.DataSource = dt; // связываешь DataTable и таблицу на форме (просто dt)
 
-            con.Open(); // открываешь соединение с БД
-            cmd.CommandText = $"Select * from {TestName}";
-            dt.Clear();
-            // todo если ещё нет таблицы
             try
             {
+                con.Open(); // открываешь соединение с БД
+                cmd.CommandText = $"Select * from {test.NameDB}";
+                dt.Clear();
+                // todo если ещё нет таблицы
                 dt.Load(cmd.ExecuteReader()); // выполняешь SQL-запрос
             }
             catch (Exception ex)

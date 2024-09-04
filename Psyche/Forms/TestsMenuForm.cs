@@ -28,7 +28,7 @@ namespace Psyche
                 {
                     Location = new Point(10, 30 * i),
                     Text = testName,
-                    Width = 200,
+                    Width = 350,
                     //AutoSize = true,
                     //AutoSizeMode = AutoSizeMode.GrowOnly
                 };
@@ -107,7 +107,7 @@ namespace Psyche
         {
             if (!TestsQueue.TryDequeue(out string currentTest))
             {
-                MessageBox.Show("Очередь тестов пуста!");
+                //MessageBox.Show("Очередь тестов пуста!");
                 return null;
             }
             listBox1.Items.RemoveAt(0);

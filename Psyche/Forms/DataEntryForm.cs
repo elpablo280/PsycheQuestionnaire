@@ -49,7 +49,7 @@ namespace Psyche
                 {
                     if (reader.HasRows)       // если нашёл такого юзера
                     {
-                        MessageBox.Show("Такой пользователь уже есть в базе данных!");
+                        //MessageBox.Show("Такой пользователь уже есть в базе данных!");
                     }
                     else
                     {

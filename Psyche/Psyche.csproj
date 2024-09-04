@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<Version>0.0.3</Version>
+	<Version>0.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,37 +32,46 @@
     <None Update="Presets\Private.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\Adaptivnost02.json">
+    <None Update="Tests\Опросник Адаптивность-02.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\IsenkTemperament.json">
+    <None Update="Tests\Методика диагностики уровня проф. выгорания Бойко.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\KOS2.json">
+    <None Update="Tests\Методика Айзенка по определению темперамента.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\LeongardShmishek.json">
+    <None Update="Tests\Опросник уровня агрессивности Басса-Дарки.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\Potemkina.json">
+    <None Update="Tests\Тест КОС-2.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\Prognoz202.json">
+    <None Update="Tests\Опросник Леонгарда-Шмишека.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\SACS.json">
+    <None Update="Tests\Индекс жизненного стиля.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\SR45.json">
+    <None Update="Tests\Методика диагностики соц.-псих. установок личности.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\STAI.json">
+    <None Update="Tests\Тест Прогноз-2-02.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\TrevogaTaylor.json">
+    <None Update="Tests\Стратегии преодоления стрессовых ситуаций.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\СonflictTomas.json">
+    <None Update="Tests\Тест СР-45.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\Шкала тревоги Спилберга.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\Личностная шкала проявления тревоги (Дж. Тейлор).json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\Типы поведения в конфликте (К. Томас).json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

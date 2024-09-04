@@ -75,6 +75,7 @@
             GetPresetResultsButton.TabIndex = 4;
             GetPresetResultsButton.Text = "Получить результаты профотбора";
             GetPresetResultsButton.UseVisualStyleBackColor = true;
+            GetPresetResultsButton.Visible = false;
             // 
             // NextRespondentButton
             // 
@@ -84,6 +85,7 @@
             NextRespondentButton.TabIndex = 5;
             NextRespondentButton.Text = "Следующий респондент";
             NextRespondentButton.UseVisualStyleBackColor = true;
+            NextRespondentButton.Visible = false;
             NextRespondentButton.Click += NextRespondentButton_Click;
             // 
             // AfterTestForm

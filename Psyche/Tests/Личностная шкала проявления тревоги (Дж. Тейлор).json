@@ -1,7 +1,7 @@
 {
   // https://psy-resultat.ru/page217
   "Name": "Личностная шкала проявления тревоги (Дж. Тейлор)",
-  "NameDB": "TrevogaTaylor",
+  "NameDB": "AnxietyTaylor",
   "TimeLimit": 900,
   "Questions": [
     {

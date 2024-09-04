@@ -41,9 +41,8 @@
             textBox1.Text = $"Добро пожаловать в Психею!{Environment.NewLine}" +
                 $"Данное десктоп-приложение представляет собой опросник с возможностью проходить тесты и смотреть их результаты, а также сохранять информацию в базе данных.{Environment.NewLine}{Environment.NewLine}" +
                 $"Над программой работали:{Environment.NewLine}{Environment.NewLine}" +
-                $"Казак Павел{Environment.NewLine}" +
-                $"Филоненко Максим (нихуя не работал){Environment.NewLine}{Environment.NewLine}" +
-                $"Исходный код проекта:{Environment.NewLine}https://github.com/elpablo280/PsycheQuestionnaire";
+                $"Wermute{Environment.NewLine}" +
+                $"Noker006{Environment.NewLine}{Environment.NewLine}";
             // 
             // CreditsForm
             // 

@@ -111,9 +111,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(873, 533);
             label1.Name = "label1";
-            label1.Size = new Size(134, 15);
+            label1.Size = new Size(112, 15);
             label1.TabIndex = 5;
-            label1.Text = "Психея pre-alpha v0.0.3";
+            label1.Text = "Психея alpha v0.0.4";
             // 
             // label2
             // 
