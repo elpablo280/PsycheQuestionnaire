@@ -113,7 +113,7 @@
             label1.Name = "label1";
             label1.Size = new Size(112, 15);
             label1.TabIndex = 5;
-            label1.Text = "Психея alpha v0.0.4";
+            label1.Text = "Психея alpha v0.0.5";
             // 
             // label2
             // 

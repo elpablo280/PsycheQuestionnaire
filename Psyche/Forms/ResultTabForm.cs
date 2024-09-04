@@ -33,31 +33,33 @@ namespace Psyche.Forms
             //    adapter.Fill(ds);
             //    dataGridView1.DataSource = ds.Tables[0];
             //}
-
-            SqliteConnection con = new()
-            {
-                ConnectionString = Config.ConnectionStrings.UsersDB
-            };
-            SqliteCommand cmd = new()
-            {
-                Connection = con
-            };
-
-            DataTable dt = new();
-            dataGridView1.DataSource = dt; // связываешь DataTable и таблицу на форме (просто dt)
-
+            SqliteConnection con = null;
             try
             {
+                con = new()
+                {
+                    ConnectionString = Config.ConnectionStrings.UsersDB
+                };
+                SqliteCommand cmd = new()
+                {
+                    Connection = con
+                };
+
+                DataTable dt = new();
+                dataGridView1.DataSource = dt; // связываешь DataTable и таблицу на форме (просто dt)
+
                 con.Open(); // открываешь соединение с БД
                 cmd.CommandText = $"Select * from {test.NameDB}";
                 dt.Clear();
                 // todo если ещё нет таблицы
                 dt.Load(cmd.ExecuteReader()); // выполняешь SQL-запрос
+                Show();
+                con.Close(); // закрываешь соединение с БД
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show($"Произошла ошибка при подключении к базе данных. {ex.Message}");
-                //Close();
+                MessageBox.Show($"Произошла ошибка при подключении к базе данных. Возможно, такой таблицы ещё не существует. Таблица создаётся при первом прохождении теста.");
+                Close();
             }
             con.Close(); // закрываешь соединение с БД
         }

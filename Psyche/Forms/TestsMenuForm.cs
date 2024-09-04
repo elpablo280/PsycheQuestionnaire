@@ -19,6 +19,7 @@ namespace Psyche
             string[] tests = Directory.GetFiles(Config.TestsFilepath);
 
             int i = 1;
+
             foreach (string test in tests)
             {
                 FileInfo fileInfo = new(test);
@@ -28,9 +29,11 @@ namespace Psyche
                 {
                     Location = new Point(10, 30 * i),
                     Text = testName,
-                    Width = 350,
-                    //AutoSize = true,
-                    //AutoSizeMode = AutoSizeMode.GrowOnly
+                    //Width = 350,
+                    MinimumSize = new(500, 30),
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowOnly,
+
                 };
                 Button.Click += (sender, EventArgs) =>
                 {

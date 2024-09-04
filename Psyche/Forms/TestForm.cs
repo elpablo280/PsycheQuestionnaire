@@ -14,6 +14,7 @@ namespace Psyche
         private DateTime StartTime;
         private DateTime EndTime;
         private readonly List<int> Answers = new();
+        private readonly List<string> TextAnswers = new();
         private readonly User CurrentUser;
         private readonly Config Config;
         readonly TestsMenuForm TestsMenuForm;
@@ -29,6 +30,12 @@ namespace Psyche
             TestParser tp = new();
             Test = tp.ParseTest(testFilepath);
 
+            InstructionForm instructionForm = new(Test.Instruction, this);
+            instructionForm.Show();
+        }
+
+        public void BeginWork()
+        {
             Text = Test.Name;
             TimeLeft = Test.TimeLimit;
 
@@ -38,11 +45,13 @@ namespace Psyche
             timerLable.Visible = TestsMenuForm.MainMenu.ShowTimer;
 
             StartTime = DateTime.Now;
+            Show();
         }
 
-        private void NextQuestionButton_Click(object sender, EventArgs e, int value)
+        private void NextQuestionButton_Click(object sender, EventArgs e, int value, string text)
         {
             Answers.Add(value);
+            TextAnswers.Add(text);
             currentQuestionIndex++;
             // создаём таблицу, высчитываем и записываем результат в конце теста
             if (currentQuestionIndex >= Test.Questions.Length)
@@ -106,9 +115,11 @@ namespace Psyche
 
                 for (int i = 0; i < Answers.Count; i++)
                 {
-                    createTableString1 += $"Question{i + 1} INTEGER NOT NULL, ";
-                    createTableString2 += $"Question{i + 1}, ";
-                    insertTableString += $"{Answers[i]}, ";
+                    createTableString1 += $"'{Test.Questions[i].Text}' TEXT NOT NULL, ";
+                    createTableString2 += $"'{Test.Questions[i].Text}', ";
+                    //createTableString1 += $"Question{i + 1} TEXT NOT NULL, ";
+                    //createTableString2 += $"Question{i + 1}, ";
+                    insertTableString += $"'{TextAnswers[i]}', ";
                 }
                 // убираем "хвост" из строк (который ", ")
                 createTableString1 = createTableString1.Remove(createTableString1.Length - 2);
@@ -126,20 +137,17 @@ namespace Psyche
                     SqliteCommand commandCreate = new()
                     {
                         Connection = connection,
-                        CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserPlatoon TEXT NOT NULL, Result TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
+                        CommandText = $"CREATE TABLE IF NOT EXISTS {Test.NameDB}(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, UserName TEXT NOT NULL, UserGroup TEXT NOT NULL, Result TEXT NOT NULL, StartTime TEXT NOT NULL, EndTime TEXT NOT NULL, {createTableString1})",
                     };
-                    
                     commandCreate.ExecuteNonQuery();
-                    //MessageBox.Show($"Таблица {Test.NameDB} создана");
 
                     // добавляем запись о прохождении теста в базу
                     SqliteCommand commandInsert = new()
                     {
                         Connection = connection,
-                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserPlatoon, Result, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{resultString}', '{StartTime}', '{EndTime}', {insertTableString})"
+                        CommandText = $"INSERT INTO {Test.NameDB} (UserName, UserGroup, Result, StartTime, EndTime, {createTableString2}) VALUES ('{FIO}', '{CurrentUser.Platoon}', '{resultString}', '{StartTime}', '{EndTime}', {insertTableString})"
                     };
                     commandInsert.ExecuteNonQuery();
-                    //MessageBox.Show($"Результат сохранён в таблицу {Test.NameDB}");
                 }
 
                 SetNextTest();
@@ -165,14 +173,13 @@ namespace Psyche
                 {
                     Name = buttonKey,
                     Location = new Point(10 + i, 50),
-                    //Location = new Point(10 + 100 * i, 50),
                     Text = variant.Text,
                     AutoSize = true,
                     AutoSizeMode = AutoSizeMode.GrowOnly
                 };
                 button.Click += (sender, EventArgs) =>
                 {
-                    NextQuestionButton_Click(sender, EventArgs, variant.Value);
+                    NextQuestionButton_Click(sender, EventArgs, variant.Value, variant.Text);
                 };
                 Controls.Add(button);
 

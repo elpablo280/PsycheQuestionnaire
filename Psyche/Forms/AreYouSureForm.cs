@@ -17,39 +17,46 @@ namespace Psyche.Forms
         {
             // todo мб стоит бэкапить базу под другим именем на всякий случай
 
-            using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
+            try
             {
-                connection.Open();
-
-                List<string> Tables = new();
-
-                SqliteCommand commandGetTableNames = new()
+                using (var connection = new SqliteConnection(Config.ConnectionStrings.UsersDB))
                 {
-                    Connection = connection,
-                    CommandText = $"Select name from sqlite_sequence",
-                };
-                using (SqliteDataReader reader = commandGetTableNames.ExecuteReader())
-                {
-                    if (reader.HasRows)
+                    connection.Open();
+
+                    List<string> Tables = new();
+
+                    SqliteCommand commandGetTableNames = new()
                     {
-                        while (reader.Read())   // построчно считываем данные
+                        Connection = connection,
+                        CommandText = $"Select name from sqlite_sequence",
+                    };
+                    using (SqliteDataReader reader = commandGetTableNames.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            Tables.Add(reader.GetValue(0).ToString());   // получаем названия таблиц с результатами тестов
+                            while (reader.Read())   // построчно считываем данные
+                            {
+                                Tables.Add(reader.GetValue(0).ToString());   // получаем названия таблиц с результатами тестов
+                            }
                         }
+                    }
+
+                    foreach (var table in Tables)
+                    {
+                        SqliteCommand commandDelete = new()
+                        {
+                            Connection = connection,
+                            CommandText = $"Delete from {table}",
+                        };
+                        commandDelete.ExecuteReader();              // удаляем данные
                     }
                 }
 
-                foreach (var table in Tables)
-                {
-                    SqliteCommand commandDelete = new()
-                    {
-                        Connection = connection,
-                        CommandText = $"Delete from {table}",
-                    };
-                    commandDelete.ExecuteReader();              // удаляем данные
-                }
-
                 MessageBox.Show("Данные удалены!");
+            }
+            catch
+            {
+                MessageBox.Show("Возникла ошибка при очистке данных. Возможно, базы данных ещё не существует.");
             }
         }
 

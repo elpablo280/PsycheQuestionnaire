@@ -66,7 +66,7 @@ namespace Psyche
             }
 
             TestForm currentTestForm = new(CurrentTestFilepath, user, Config, TestsMenuForm);
-            currentTestForm.Show();
+            //currentTestForm.Show();
 
             Close();
         }
